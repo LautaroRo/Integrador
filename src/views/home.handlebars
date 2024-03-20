@@ -1,0 +1,18 @@
+<div>
+    <input type="text" id="chatbox">
+    {{#if mensajes}}
+        {{#each mensajes}}
+            <p>{{nombre}} dice {{mensaje}}</p>
+        {{/each}}
+    {{else}}
+        <p>No hay mensajes disponibles.</p>
+    {{/if}}
+    <p id="log"></p>
+</div>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
+<script src="./../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
