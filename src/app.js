@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import  routerProduct  from "./routes/productRouter.js";
 import cartRouter from "./routes/cartsRouter.js";
 import messageManager from "./dao/services/meesagesManager.js";
+import productsModel from "./dao/models/products.js";
+
 
 
 const message = new messageManager
@@ -28,8 +30,8 @@ const connectMongoDB = async () => {
     try{
 
         const dataBase = "mongodb+srv://Lautaro:Ors6E5ixvF0N1pVh@cluster0.beeo5kk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-        
         await mongoose.connect(dataBase)
+
         console.log("conectado")
     }catch(error){
         console.error("No se pudo conectar")
@@ -43,7 +45,21 @@ connectMongoDB()
 const servidor = app.listen(PORT, () => console.log("servidor corriendo"))
 const io = new Server(servidor)
 
+app.get("/productos/info/:limit?", async(req,res) => {
 
+    let limite = req.params.limit
+    console.log(limite)
+    if(limite ){
+        limite = parseInt(limite)
+    }else{
+        limite = 10
+    }
+
+    const productos = await productsModel.paginate({},{limit: limite})
+    console.log(productos)
+    res.json({productos})
+
+})
 app.get("/", async(req,res) => {
     const mensajes = await message.mostrarMensajes()
     let informacion = []

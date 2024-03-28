@@ -1,8 +1,16 @@
 import mongoose from "mongoose"
-
+import mongoosePaginate from "mongoose-paginate-v2"
 const {Schema} = mongoose
 
 const collection = "products"
+
+const thumbnailSchema = new Schema({
+
+    img: {
+        type: String,
+        required: true
+    }
+});
 
 const schema = new Schema({
     title: {
@@ -11,36 +19,42 @@ const schema = new Schema({
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     code: {
         type: String,
-        require: true
+        required: true
     },
     category: {
         type: String,
-        require: true 
+        required: true 
     },
     brands: {
         type: String
     },
     stock: {
         type: Number,
-        require: true 
+        required: true 
     },
     thumbnails: {
-        type: [String],
-        require: true 
+        type: [thumbnailSchema], // Cambiado a un array de objetos según thumbnailSchema
+        required: true 
     },
     status: {
         type: Boolean,
-        require: true 
+        required: true 
     },
     price: {
         type: Number,
-        require: true 
+        required: true 
     }
 });
-const productsModel = mongoose.model(collection, schema)
 
-export default productsModel
+
+
+
+schema.plugin(mongoosePaginate);
+
+const productsModel = mongoose.model(collection, schema);
+
+export default productsModel;

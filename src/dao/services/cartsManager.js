@@ -34,5 +34,38 @@ export default class cartManager {
         return await cart.save();
     }
 
+    deleteProduct = async(cid,pid) => {
+        let cart = await cartsModel.findById(cid)
+        cart.productsCart = cart.productsCart.filter(element => element.product.toString() !== pid)
+
+        await cart.save();
+
+        console.log("Producto eliminado del carrito");
+    }
+
+    updateProduct = async(cid,body) => {
+        let cart = await cartsModel.findById(cid)
+        await cartsModel.updateOne({_id: cid}, {$set: body})
+        await cart.save();
+    }        
+
+    updateProductInCart = async(cid,pid,body) => {
+
+        let cart = await cartsModel.findById(cid)
+        
+        const filtrado = cart.productsCart = cart.productsCart.find(element => element.product.toString() == pid)
+
+
+        filtrado.quantity = body.quantity;
+
+        await cart.save();
+    }
+    deleteAllProduct = async(cid) => {
+
+        let cart = await cartsModel.findById(cid)
+
+        cart.productsCart = []
+        await cart.save();
+    }
 
 }
