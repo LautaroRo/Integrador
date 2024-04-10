@@ -37,7 +37,7 @@ const schema = new Schema({
         required: true 
     },
     thumbnails: {
-        type: [thumbnailSchema], // Cambiado a un array de objetos según thumbnailSchema
+        type: [thumbnailSchema], 
         required: true 
     },
     status: {

@@ -38,9 +38,15 @@ routerProduct.get("/products/:id", async(req,res) => {
 
     const params = req.params.id
 
-    let result = await productManager.getById(params)
+    const result = await productManager.getById(params)
 
-    res.json({result})
+    const objeto = {
+        title: result.title,
+        img: result.thumbnails[0].img
+    }
+
+
+    res.render("productsByid", objeto )
 
 })
 
@@ -67,9 +73,12 @@ routerProduct.get("/mostrar/productos/:limit?", async(req,res) => {
     }
 
     const response = await productsModel.paginate({}, {page,limit: limite,lean: true})
+
     response.isValid = page >= 1 && page <= response.totalPages
     response.NextLink = response.hasNextPage ?`http://localhost:8080/mostrar/productos/${limite}?page=${response.nextPage}` : ""
     response.PrevLink = response.hasPrevPage ? `http://localhost:8080/mostrar/productos/${limite}?page=${response.prevPage}` : ""
+
+    
 
     res.render("products", response)
 

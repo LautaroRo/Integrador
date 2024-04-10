@@ -14,11 +14,8 @@ export default class ProductManager {
     }
 
     getById = async(id) => {
-
         let result = await productsModel.findById(id)
-
-            return result
-
+        return result
 
     }
 

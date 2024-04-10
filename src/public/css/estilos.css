@@ -1,0 +1,192 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.containerProducts{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+.containerProducts div{
+    margin: 3em;
+}
+.containerProducts img{
+    height: 20em;
+    width: 20em;
+
+}
+.containerInside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/*-loginUsers-*/
+.containerFormCreate{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.formCreateUser{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.formCreateUser div{
+    margin: 0;
+    padding: 1em;
+}
+.formCreateUser div input,
+.formCreateUser div select{
+    width: 100%;
+    padding: .7em;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #dfc9c9ce;
+    outline: none;
+    color: #fff;
+}
+
+.formCreateUser div select{
+    color: white;
+}
+
+label{
+    color: white;
+    position: relative;
+}
+
+label::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid white;
+    display: block;
+}
+
+.formLogin{
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.formLogin button{
+    margin: 1em;
+}
+
+option{
+    background-color: black;
+    border: none;
+    outline: none;
+}
+/*-- css users.handlebars--*/
+.containerUsers{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.containerUsersInside h3{
+    color: rgba(255, 255, 255, 0.692);
+}
+
+.containerForm{
+    width: 92%;
+    display: flex;
+    justify-content: end;
+
+}
+
+.containerForm form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputsAndButton{
+    display: flex;
+    flex-direction: row;
+}
+.containerForm form input{
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: .5em;
+    margin: 0 1em;
+}
+.containerForm form button{
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.containerForm form img{
+    width: 1em;
+    height: 1em;
+}
+
+
+.usersanimation{
+    margin: 1em;
+    position: relative;
+    height: 8em;
+    width: 16em;
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+    align-items: center;
+    margin-bottom: 4%;
+}
+
+.usersanimation div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: .5s;
+    overflow: hidden;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerUsersInside{
+    width: 90%;
+    height: 100%;
+    color: #f3f3f3;
+    position: absolute;
+}
+.showId{
+    transform: rotateY(180deg);
+    color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+    justify-content: center;
+
+}
+
+.usersanimation:hover .containerUsersInside{
+    transform: rotateY(180deg);
+}
+
+
+.usersanimation:hover .showId{
+    transform: rotateY(360deg);
+}

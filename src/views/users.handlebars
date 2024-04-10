@@ -1,0 +1,39 @@
+<p>
+    {{#if isValid}}
+        <div class="containerForm">
+            <form method="get" action="/UserFound">
+                <h1>Search users</h1>
+                <div class="inputsAndButton">                             
+                    <input type="text" name="_id" id="_id">
+                    <button type="submit"><img src="https://img.freepik.com/vector-premium/icono-busqueda-simbolo-lupa-icono-contorno_543062-139.jpg?w=360"/></button></div>
+            </form>
+        </div>
+
+        <div class="containerUsers">
+            {{#each docs}}
+            <div class="usersanimation">
+                <div class="containerUsersInside">
+                    <h3>{{this.First_Name}} {{this.Last_Name}}</h3>
+                </div>
+                <div class="showId">
+                    <h5>{{this._id}}</h5>
+                </div>
+            </div>
+
+
+            {{/each}}
+        </div>
+
+
+
+        {{#if hasPrevPage}}
+            <a href={{this.PrevLink}}>Anterior</a>
+        {{/if}}
+
+        {{this.page}}
+        {{#if hasNextPage}}
+            <a href={{this.NextLink}}>Siguiente</a>
+        {{/if}}
+    {{/if}}
+
+</p>

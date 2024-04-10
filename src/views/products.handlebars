@@ -1,19 +1,29 @@
 <div>
     <h1>Ver listado de productos:</h1>
-    {{#if isValid}}
-        {{#each docs}}
-            <div>
-                <p>Nombre: {{this.title}}</p>
+    <div class="mainContainer">
+
+        {{#if isValid}}
+        <div class="containerProducts">
+            {{#each docs}}
+            <div class="containerInside">
+
+                <img class="imagen" src={{this.thumbnails.[0].img}}>
+                <p>{{this.title}}</p>
+                <a href="http://localhost:8080/products/{{this._id}}">Ver</a>
             </div>
-        {{/each}}
+            {{/each}}
+        </div>
+
+
+
         {{#if hasPrevPage}}
-            <a href={{this.PrevLink}}>Anterior</a>
+        <a href={{this.PrevLink}}>Anterior</a>
         {{/if}}
 
         {{this.page}}
-
         {{#if hasNextPage}}
-            <a href={{this.NextLink}}>Siguiente</a>
+        <a href={{this.NextLink}}>Siguiente</a>
         {{/if}}
-    {{/if}}
+        {{/if}}
+    </div>
 </div>
