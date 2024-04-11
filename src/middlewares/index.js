@@ -8,8 +8,9 @@ import routerProduct from "../routes/productRouter.js"
 import cartRouter from "../routes/cartsRouter.js";
 import usersRouter from "../routes/usersRouter.js"
 import { Server } from "socket.io"
-
-
+import usersManager from "../dao/services/usersManager.js"
+import usersModel from "../dao/models/users.js"
+const userManagers = new usersManager()
 
 
 const app = express()
@@ -52,5 +53,81 @@ connectMongoDB()
 const servidor = app.listen(PORT, () => console.log("servidor corriendo"))
 const io = new Server(servidor)
 
+
+//Registrarse
+
+app.get("/register", ( req,res) => {
+    if(req.session.user){
+        req.session.destroy()
+    }
+    res.render("registerUsers")
+})
+
+app.post("/register/registerCreateUser", async (req, res) => {
+
+    const { First_Name, Last_Name, Email, Age, Number, Role, Password } = req.body
+
+    const exists = await usersModel.findOne({ Email: Email })
+
+    if (exists) return res.send("Este mail ya es utilizado")
+    let info = {
+        First_Name: First_Name,
+        Last_Name: Last_Name,
+        Email: Email,
+        Age: Age,
+        Number: Number,
+        Role: Role,
+        Password: Password
+    }
+
+    req.session.user = {
+        First_Name: First_Name,
+        Last_Name: Last_Name,
+        Email: Email,
+        Age: Age,
+    }
+    userManagers.createUser(info)
+
+    res.render("BornUser", req.session.user)
+})
+
+//logearse
+app.get("/LoginUser", (req,res) => {
+    if(req.session.user){
+        req.session.destroy()
+    }
+    res.render("LoginUsers")
+})
+
+app.post("/ShowTheUserLogin", async (req, res) => {
+    const { Email, Password } = req.body
+
+    const response = await userManagers.SiginInUsers(Email, Password)
+    const NoEncontrado = { 
+        mensaje: "Usuario No encontrado"
+    }
+
+    if(response){
+
+            req.session.user = {
+            First_Name: response.First_Name,
+            Last_Name: response.Last_Name,
+            Age: response.Age,
+            Email: response.Email
+        }
+
+        console.log(req.session.user)
+        res.render("UserLogin", req.session.user)
+    }else{
+        res.render("LoginUsers", NoEncontrado )
+    }
+})
+
+//mostrar el usuario en linea
+app.get("/UserLogin", (req,res) => {
+
+    res.render("UserLogin", req.session.user)
+
+})
 
 export default {io ,app}

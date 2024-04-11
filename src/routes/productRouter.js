@@ -6,12 +6,7 @@ const productManager = new ProductManager()
 const routerProduct = Router()
 
 
-routerProduct.get("/products", async(req,res) => {
 
-    const response = await productManager.getAll()
-
-    res.json({response})
-})
 
 routerProduct.post("/products/agregar", async(req,res) => {
     

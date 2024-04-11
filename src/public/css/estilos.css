@@ -1,3 +1,4 @@
+
 body{
     margin: 0;
     padding: 0;
@@ -8,7 +9,7 @@ body{
     flex-direction: column;
 }
 
-
+/*- css producst.handlebars-*/
 .containerProducts{
     display: flex;
     width: 100%;
@@ -30,13 +31,20 @@ body{
     align-items: center;
     flex-direction: column;
 }
-/*-loginUsers-*/
-.containerFormCreate{
+/*-loginUsers and registerUsers-*/
+.containerFormCreate,
+.containerLoginForm{
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
+}
+
+.containerFormCreate a,
+.containerLoginForm a{
+    color: white;
 }
 .formCreateUser{
     display: grid;
@@ -129,6 +137,7 @@ option{
     padding: .5em;
     margin: 0 1em;
 }
+
 .containerForm form button{
     border-radius: 10px;
     outline: none;
@@ -190,3 +199,6 @@ option{
 .usersanimation:hover .showId{
     transform: rotateY(360deg);
 }
+
+
+
