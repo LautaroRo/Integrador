@@ -125,7 +125,9 @@ app.post("/ShowTheUserLogin", async (req, res) => {
 
 //mostrar el usuario en linea
 app.get("/UserLogin", (req,res) => {
-
+    if(!req.session.user){
+        res.render("LoginUsers")
+    }
     res.render("UserLogin", req.session.user)
 
 })
