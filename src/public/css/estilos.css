@@ -202,3 +202,14 @@ option{
 
 
 
+/*--Restablecer password--*/
+
+#restoreForm{
+    display: flex;
+    flex-direction: column;
+}
+
+
+#restoreForm input{
+    margin: 1em;
+}
