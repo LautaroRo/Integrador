@@ -15,7 +15,7 @@ import passport from "passport"
 import initializePassport from "./config/passportConfig.js"
 
 
-initializePassport()
+
 
 
 const app = express()
@@ -28,11 +28,6 @@ app.set("view engine", "handlebars")
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(__dirname + "/public"))
-app.use(routerProduct)
-app.use(cartRouter)
-app.use(usersRouter)
-app.use(routerLogin)
-app.use(routerRegister)
 app.engine("handlebars", handlebars.engine())
 
 app.use(session({
@@ -42,8 +37,6 @@ app.use(session({
     store: connectMongo.create({mongoUrl:"mongodb+srv://Lautaro:Ors6E5ixvF0N1pVh@cluster0.beeo5kk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",ttl:3600})
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
 
 
 const connectMongoDB = async () => {
@@ -64,8 +57,21 @@ const connectMongoDB = async () => {
 
 connectMongoDB()
 
+
 const servidor = app.listen(PORT, () => console.log("servidor corriendo"))
 const io = new Server(servidor)
+
+app.use(routerProduct)
+app.use(cartRouter)
+app.use(usersRouter)
+app.use(routerLogin)
+app.use(routerRegister)
+
+
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 const message = new messages
 

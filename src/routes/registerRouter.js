@@ -1,19 +1,10 @@
 import { Router } from "express";
-//import { createHash } from "../utils.js";
 import session from "express-session";
 import connectMongo from "connect-mongo"
-//import usersModel from "../dao/models/users.js";
-import usersManager from "../dao/services/usersManager.js";
 import passport from "passport";
-import initializePassport from "../config/passportConfig.js";
 
 const routerRegister = Router()
 
-//const usersManagers = new usersManager()
-
-initializePassport()
-routerRegister.use(passport.initialize())
-routerRegister.use(passport.session())
 
 
 routerRegister.use(session({
@@ -39,33 +30,11 @@ routerRegister.get("/failRegister", async(req,res) => {
     res.send({error: "Error"})
 })
 
-/*--
-routerRegister.post("/register/registerCreateUser", async (req, res) => {
 
-    const { First_Name, Last_Name, Email, Age, Number, Role, Password } = req.body
-
-    const exists = await usersModel.findOne({ Email: Email })
-
-    if (exists) return res.send("Este mail ya es utilizado")
-    let info = {
-        First_Name: First_Name,
-        Last_Name: Last_Name,
-        Email: Email,
-        Age: Age,
-        Number: Number,
-        Role: Role,
-        Password: createHash(Password)
-    }
-
-    req.session.user = {
-        First_Name: First_Name,
-        Last_Name: Last_Name,
-        Email: Email,
-        Age: Age,
-    }
-    usersManagers.createUser(info)
-
-    res.render("BornUser", req.session.user)
-})
---*/
 export default routerRegister
+
+
+
+
+
+
