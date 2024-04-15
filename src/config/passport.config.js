@@ -14,7 +14,9 @@ const initializePassport = () => {
         new LocalStrategy(
             {passReqToCallback: true, usernameField: "Email"},
         async(req,username,password, done) => {
+            
         console.log("Entro")
+        
         const { First_Name, Last_Name, Email, Age, Number, Role } = req.body;
 
         try{
